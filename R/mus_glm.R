@@ -8,7 +8,7 @@
 #' @param family "binomial" or "poisson"
 #' @return Intercept and coefficients at the values of lambda and delta specified.
 #'
-mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alternative){
+mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alternative = F){
 
   family <- match.arg(family)
 
