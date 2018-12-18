@@ -8,7 +8,7 @@
 #' @param family "binomial" or "poisson"
 #' @return Intercept and coefficients at the values of lambda and delta specified.
 #'
-mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson")){
+mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alternative){
 
   family <- match.arg(family)
 
@@ -39,7 +39,12 @@ mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson")){
       z <- W%*%bOld + (y - mu(W%*%bOld))/dmu(W%*%bOld)
       Wtilde <- c(sqrt(V)) * W
       ztilde <- c(sqrt(V)) * c(z)
+      if(alternative == F){
       bNew <- musalgorithm(Wtilde, ztilde, lambda, delta * sqrt(sum((V)^2)) / sqrt(n))
+        }
+      if(alternative == T){
+      bNew <- musalgorithm_alt(Wtilde, ztilde, lambda, delta * sqrt(sum((V)^2)) / sqrt(n))
+        }
 
       count <- count+1
       Diff1 <- sum(abs(bNew - bOld))
