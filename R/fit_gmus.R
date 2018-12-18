@@ -49,8 +49,8 @@ fit_gmus <- function(W, y, lambda = NULL, delta = NULL,
 
   n <- dim(W)[1]
   p <- dim(W)[2] + 1
-  W <- scale(W)
-  scales <- attr(W, "scaled:scale")
+  #W <- scale(W)
+  #scales <- attr(W, "scaled:scale")
   W <- cbind(rep(1,n), W)
 
   if(family == "gaussian") {
@@ -62,7 +62,8 @@ fit_gmus <- function(W, y, lambda = NULL, delta = NULL,
 
 
   fit <- list(intercept = fit[1, ],
-              beta = fit[2:p, ] / scales,
+              #beta = fit[2:p, ] / scales,
+              beta = fit[2:p, ],
               family = family,
               delta = delta,
               lambda = lambda,
