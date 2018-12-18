@@ -22,12 +22,13 @@ musalgorithm <- function(W, y, lambda, delta){
 
   # First "score function" constraint
   mat[(2*p+1),1:p] <- matrix(0, nrow=1, ncol=p)
-  mat[(2*p+2):(3*p),1:p] <- matrix(-delta, nrow=(p-1), ncol=p)
+  mat[(2*p+2):(3*p),1:p] <- t(t(matrix(-delta, nrow=(p-1), ncol=p)) * apply(W, 2, function(x){sqrt(sum(x^2))})) / sqrt(p)
+  
   mat[(2*p+1):(3*p),(p+1):(2*p)] <- 1/n*(t(W)%*%W)
 
   # Second "score function" constraint
   mat[(3*p+1),1:p] <- matrix(0, nrow=1, ncol=p)
-  mat[(3*p+2):(4*p),1:p] <- matrix(-delta, nrow=(p-1), ncol=p)
+  mat[(3*p+2):(4*p),1:p] <- t(t(matrix(-delta, nrow=(p-1), ncol=p)) * apply(W, 2, function(x){sqrt(sum(x^2))})) / sqrt(p)
   mat[(3*p+1):(4*p),(p+1):(2*p)] <- -1/n*(t(W)%*%W)
 
   rhs <- rep(0,(4*p))
