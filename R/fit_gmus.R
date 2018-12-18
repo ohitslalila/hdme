@@ -40,7 +40,7 @@
 #'
 #' @export
 fit_gmus <- function(W, y, lambda = NULL, delta = NULL,
-                     family = c("gaussian", "binomial", "poisson")) {
+                     family = c("gaussian", "binomial", "poisson"), alternative = F) {
 
   family <- match.arg(family)
 
@@ -57,7 +57,7 @@ fit_gmus <- function(W, y, lambda = NULL, delta = NULL,
     fit <- sapply(delta, function(delta, W, y, lambda) musalgorithm(W, y, lambda, delta),
                   W, y, lambda)
   } else if(family %in% c("binomial", "poisson")) {
-    fit <- sapply(delta, function(delta, W, y, lambda, family) mus_glm(W, y, lambda, delta, family), W, y, lambda, family)
+    fit <- sapply(delta, function(delta, W, y, lambda, family) mus_glm(W, y, lambda, delta, family, alternative), W, y, lambda, family, alternative)
   }
 
 
