@@ -51,8 +51,8 @@ mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alte
       bNew <- musalgorithm(Wtilde, ztilde, lambda, delta * sqrt(sum((V)^2)) / sqrt(n))
         }
       if(alternative == T){
-      bNew <- musalgorithm_alt(Wtilde, ztilde, lambda, delta * abs(t(V) %*% W[,-1]) / n)
-       #bNew <- musalgorithm(Wtilde, ztilde, lambda, delta * sqrt(sum((V)^2)) / sqrt(n))
+       #bNew <- musalgorithm_alt(Wtilde, ztilde, lambda, delta * abs(t(V) %*% W[,-1]) / n)
+       bNew <- musalgorithm_alt(Wtilde, ztilde, lambda, delta * sqrt(sum((V)^2)) / sqrt(n))
         }
 
       count <- count+1
