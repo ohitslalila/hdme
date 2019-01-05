@@ -19,10 +19,17 @@ mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alte
     mu <- pois
     dmu <- dpois
   }
-
+    
 
   n <- dim(W)[1]
   p <- dim(W)[2]
+  
+  if(alternative == F){
+      W <- scale(W[,2:p])
+      scales <- attr(W, "scaled:scale")
+      W <- cbind(rep(1,n), W) 
+  }
+
 
   bOld <- stats::rnorm(p)/p
   bNew <- stats::rnorm(p)/p
