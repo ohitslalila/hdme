@@ -24,7 +24,7 @@ mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alte
   n <- dim(W)[1]
   p <- dim(W)[2]
   
-  if(True){
+  if(T){
   #if(alternative == F){
       W <- scale(W[,2:p])
       scales <- attr(W, "scaled:scale")
