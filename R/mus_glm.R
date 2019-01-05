@@ -57,6 +57,7 @@ mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alte
         }
 
       count <- count+1
+      print(count)
       Diff1 <- sum(abs(bNew - bOld))
       Diff2 <- sum(abs(bNew - bOlder))
   }
