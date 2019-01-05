@@ -58,5 +58,11 @@ mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alte
       Diff2 <- sum(abs(bNew - bOlder))
   }
   if(count >= maxit) print(paste("Did not converge"))
-  return(bNew)
+  
+  if(alternative == F){
+      return(rbind(bNew[1, ], bNew[2:p, ] / scales))
+    }
+  if(alternative == T){
+      return(bNew)
+  }
 }
