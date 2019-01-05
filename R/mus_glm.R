@@ -24,7 +24,8 @@ mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alte
   n <- dim(W)[1]
   p <- dim(W)[2]
   
-  if(alternative == F){
+  if(True){
+  #if(alternative == F){
       W <- scale(W[,2:p])
       scales <- attr(W, "scaled:scale")
       W <- cbind(rep(1,n), W) 
@@ -50,7 +51,7 @@ mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alte
       bNew <- musalgorithm(Wtilde, ztilde, lambda, delta * sqrt(sum((V)^2)) / sqrt(n))
         }
       if(alternative == T){
-      bNew <- musalgorithm_alt(Wtilde, ztilde, lambda, delta * sqrt(sum((V)^2)) / sqrt(n))
+      bNew <- musalgorithm_alt(Wtilde, ztilde, lambda, delta * sum(abs(V) %*% W[,-1]) / n)
         }
 
       count <- count+1
@@ -63,6 +64,7 @@ mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alte
       return(c(bNew[1], bNew[2:p] / scales))
     }
   if(alternative == T){
-      return(bNew)
+      #return(bNew)
+      return(c(bNew[1], bNew[2:p] / scales))
   }
 }
