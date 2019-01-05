@@ -60,7 +60,7 @@ mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alte
   if(count >= maxit) print(paste("Did not converge"))
   
   if(alternative == F){
-      return(rbind(bNew[1, ], bNew[2:p, ] / scales))
+      return(c(bNew[1], bNew[2:p] / scales))
     }
   if(alternative == T){
       return(bNew)
