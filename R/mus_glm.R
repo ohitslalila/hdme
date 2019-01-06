@@ -48,10 +48,12 @@ mus_glm <- function(W, y, lambda, delta, family = c("binomial", "poisson"), alte
       Wtilde <- c(sqrt(V)) * W
       ztilde <- c(sqrt(V)) * c(z)
     
-      if(alternative == F | (Diff1 > 10 ^ (-2) & count < 10)){
+      if(alternative == F){
+      #if(alternative == F | (Diff1 > 10 ^ (-2) & count < 10)){
       bNew <- musalgorithm(Wtilde, ztilde, lambda, delta * sqrt(sum((V)^2)) / sqrt(n))
         }
-      if(alternative == T & (Diff1 <= 10 ^ (-2) | count >= 10)){
+      if(alternative == T){ 
+    #if(alternative == T & (Diff1 <= 10 ^ (-2) | count >= 10)){
         bNew <- musalgorithm_alt(Wtilde, ztilde, lambda, delta * abs(t(V) %*% W[,-1]) / n)
        #bNew <- musalgorithm_alt(Wtilde, ztilde, lambda, delta * sqrt(sum((V)^2)) / sqrt(n))
         }
