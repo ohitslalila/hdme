@@ -67,7 +67,7 @@ fit_gmus <- function(W, y, lambda = NULL, delta = NULL,
               family = family,
               delta = delta,
               lambda = lambda,
-              num_non_zero = colSums(fit[2:p, , drop = FALSE] > 0)
+              num_non_zero = colSums(fit[2:p, , drop = FALSE] != 0)
               )
 
   class(fit) <- "gmus"
