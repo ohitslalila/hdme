@@ -39,8 +39,8 @@
 #' plot(gmus2)
 #'
 #' @export
-fit_gmus <- function(W, y, lambda = NULL, delta = NULL,
-                     family = c("gaussian", "binomial", "poisson"), alternative = F) {
+fit_gmus <- function(W, y, lambda = NULL, delta = NULL, theta = NULL,
+                     family = c("gaussian", "binomial", "poisson", "nb"), alternative = F) {
 
   family <- match.arg(family)
 
@@ -58,8 +58,9 @@ fit_gmus <- function(W, y, lambda = NULL, delta = NULL,
                   W, y, lambda)
   } else if(family %in% c("binomial", "poisson")) {
     fit <- sapply(delta, function(delta, W, y, lambda, family, alternative) mus_glm(W, y, lambda, delta, family, alternative), W, y, lambda, family, alternative)
+  } else if(family == "nb") {
+    fit <- sapply(delta, function(delta, W, y, lambda, theta, family, alternative) mus_glm_nb(W, y, lambda, delta, theta, family, alternative), W, y, lambda, theta, family, alternative)
   }
-
 
   fit <- list(intercept = fit[1, ],
               #beta = fit[2:p, ] / scales,
@@ -67,6 +68,7 @@ fit_gmus <- function(W, y, lambda = NULL, delta = NULL,
               family = family,
               delta = delta,
               lambda = lambda,
+              theta = theta,
               num_non_zero = colSums(fit[2:p, , drop = FALSE] != 0)
               )
 
