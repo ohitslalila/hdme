@@ -1,4 +1,3 @@
-else
 #' Generalized Matrix Uncertainty Selector for logistic regression
 #'
 #' @description Internal function.
