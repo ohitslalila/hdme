@@ -10,6 +10,9 @@ dlogit <- function(x) exp(-x)*(1+exp(-x))^(-2)
 pois <- function(x) exp(x)
 dpois <- function(x) exp(x)
 
+# Probit
+Phi <- function(x) pnorm(x)
+dPhi <- function(x) dnorm(x)
 
 
 set_radius <- function(W, y, family = "gaussian", no_radii,

@@ -39,8 +39,8 @@
 #' plot(gmus2)
 #'
 #' @export
-fit_gmus <- function(W, y, lambda = NULL, delta = NULL, theta = NULL,
-                     family = c("gaussian", "binomial", "poisson", "nb"), alternative = F) {
+fit_gmus <- function(W, y, lambda = NULL, delta = NULL, theta = NULL, C = NULL,
+                     family = c("gaussian", "binomial", "poisson", "nb", "probit"), alternative = F) {
 
   family <- match.arg(family)
 
@@ -60,7 +60,11 @@ fit_gmus <- function(W, y, lambda = NULL, delta = NULL, theta = NULL,
     fit <- sapply(delta, function(delta, W, y, lambda, family, alternative) mus_glm(W, y, lambda, delta, family, alternative), W, y, lambda, family, alternative)
   } else if(family == "nb") {
     fit <- sapply(delta, function(delta, W, y, lambda, theta, family, alternative) mus_glm_nb(W, y, lambda, delta, theta, family, alternative), W, y, lambda, theta, family, alternative)
+  } else if(family == "probit") {
+    fit <- sapply(delta, function(delta, W, y, lambda, theta, family, alternative, C) mus_glm_pr(W, y, lambda, delta, theta, family, alternative, C), W, y, lambda, theta, family, alternative, C)
   }
+
+
 
   fit <- list(intercept = fit[1, ],
               #beta = fit[2:p, ] / scales,
