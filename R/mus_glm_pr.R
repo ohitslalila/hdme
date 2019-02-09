@@ -51,7 +51,7 @@ mus_glm_pr<- function(W, y, lambda, delta, theta, family = "probit", alternative
     Q <- (-(W%*%bOld) * (V^2) * (Phi_x * (1 - Phi_x)) - (1 - 2 * Phi_x) * (V^3)) / ((Phi_x * (1 - Phi_x))^2)
     delta1 <- delta * sum(bOld^2) / n * abs(t(Q) %*% W[, -1])
 
-    bNew <- musalgorithm_nb(Wtilde, Utilde, ztilde, lambda, delta * C * max(V), delta1)
+    bNew <- musalgorithm_nb(Wtilde, Utilde, ztilde, lambda, delta * max(V * Utilde), delta1)
     count <- count+1
     print(count)
     Diff1 <- sum(abs(bNew - bOld))
