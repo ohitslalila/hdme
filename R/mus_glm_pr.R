@@ -16,7 +16,7 @@ mus_glm_pr<- function(W, y, lambda, delta, theta, family = "probit", alternative
     mu <- Phi
     dmu <- dPhi
   }
-  C <- dnorm(C) / (pnorm(C) * (1 - pnorm(C)))
+  #C <- dnorm(C) / (pnorm(C) * (1 - pnorm(C)))
 
   n <- dim(W)[1]
   p <- dim(W)[2]
