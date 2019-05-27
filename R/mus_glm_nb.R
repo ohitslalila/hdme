@@ -22,10 +22,12 @@ mus_glm_nb <- function(W, y, lambda, delta, theta, family = "nb", alternative = 
   p <- dim(W)[2]
 
   if(T){
+    print("I am scaling")
     #if(alternative == F){
     W <- scale(W[,2:p])
     scales <- attr(W, "scaled:scale")
     W <- cbind(rep(1,n), W)
+    print("scaling done.")
   }
 
 
