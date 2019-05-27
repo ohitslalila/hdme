@@ -44,6 +44,7 @@ mus_glm_nb <- function(W, y, lambda, delta, theta, family = "nb", alternative = 
     bOld <- bNew
     V <- dmu(W%*%bOld)
     z <- W%*%bOld + (y - mu(W%*%bOld))/dmu(W%*%bOld)
+    print(z)
     Wtilde <- c(sqrt(V)) * W
     ztilde <- c(sqrt(V)) * c(z)
     Utilde <- theta / (theta + V)
